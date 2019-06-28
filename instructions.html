@@ -1,0 +1,22 @@
+<html>
+<style>
+      .footer {
+            color: black; background: #E8E8E8;
+            position: fixed; top: 90%;
+            text-align:center; width:100%;
+      }
+</style>
+
+<body>
+
+<br><br>
+The application loads to a screen with three tabs: [Main], [Description], and [Help]. The <b>[Main]</b> tab houses the application, while the other tabs decribe how the app works and how to interact with it respectively. As the app loads, it brings into memory 5 n-gram files prodced before that hold the most frequent n-grams for n=1 through n=5. You will also see a user input screen where the user can enter a phrase with seven action buttons. Below that you will see the applcation results as a list of ranked items 1 through 5 showing the <i>NextWord</i> predictions. In this table, the <i>sScore</i> represents the resulting likelyhood based on the backoff and smoothing algorythms. The final column nGram shows at what level <i>n-gram</i> table that particular match occured.
+<br><br>
+Heres how you interact with the application:
+<br><br>
+1- The application provides a starter n-gram already placed in the input windo, which you can replace at any point by clicking in the field and writing your own entry. By selecting the <b>[Random Ngram]</b> button the systems will randonly return a 5-gram from the loaded data base. You may use the <b>[Clear]</b> button to clear the field.
+<br><br>
+2- The table showing the predicted words will update everytime a change is made to the field and you may select one of the buttons labeled <b>[Add1]</b> - <b>[Add5]</b> to select a result accordingly. In doing so, that word will be added to the end of the n-gram displayed in the window. The table will recalculate as well.
+
+</body>
+</html>

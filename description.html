@@ -1,0 +1,36 @@
+<html>
+<style>
+      .footer {
+            color: black; background: #E8E8E8;
+            position: fixed; top: 90%;
+            text-align:center; width:100%;
+      }
+</style>
+
+<body>
+
+<br><br>
+1- <b>Building n-grams</b>:
+<br><br>
+Likely the most important part of the algorithm is building the database from which we will precict. As mentioned before, we decided to use n=1 to n=5 ngrams, but the process starts with processing the corpus to identify the words or <u>tokens</u> we will use as a reference of the English language. After we tokenize the whole corpus, we proceeded with elimination of numbers, puctuations, symbols, separators, hyphens, and repeated words. In addition, we decided to remove all twitter hash-tags, profanity worss, and URL references. Care was taken to "pad" these removals with blank entrees so as to not create bogus n-grams subsequently.
+<br><br>
+- All n-grams were saved as binary .Rdata  <b><i><a href="https://cran.r-project.org/web/packages/data.table/index.html">data.table</a></i></b>
+ files for subsequent use and fast-access purposes.
+<br><br>
+- We used the R 
+<b><i><a href="https://cran.r-project.org/web/packages/quanteda/index.html">quanteda</a></i></b>
+ library for corpus tokenization and clean-up purposes.
+<br><br>
+- Any n-grams occuring twice or less were removed from our database.
+
+<br><br><br>
+2- <b>Prediction Algorythm</b>:
+<br><br>
+In the PredictWord app, the user inputed n-gram is cleaned up by the same process as the original n-grams. We made use of the 
+<i><b><a href="https://www.aclweb.org/anthology/D07-1090">Stupid Backoff</a></b></i>
+ smoothing approach to predict and assign increasing likelyhood scores based on the n-gram frequency tables in our database. It has been shown that this approach is fairly well suited for very large n-gram databases (i.e. like our case), approximating the accuracy of other, more elaborate apporaches like 
+<i><a href="https://en.wikipedia.org/wiki/Kneser%E2%80%93Ney_smoothing">Kneser–Ney</a></i>.
+<br><br>
+- For blank entries, we recommend the most frequently occuirng words as a starting point.
+</body>
+</html>
