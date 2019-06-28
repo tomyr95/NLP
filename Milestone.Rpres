@@ -1,0 +1,144 @@
+NLP Capstone Milestone Report
+========================================================
+author: Tomas R. Rodriguez
+date: 5/26/2019
+font-family: Verdana
+width: 1920
+height: 1080
+
+Overview
+========================================================
+<div class="footer" style="margin-top:100px;font-size:100%;">
+NLP Milestone Report - Data Science Capstone, By: Tomas R. Rodriguez, 5/26/19<br></div>
+
+```{r, echo = FALSE, EVAL = TRUE}
+      library(LaF)            
+      library(quanteda)       
+      library(data.table)
+      library(readtext)
+      library(dplyr)
+      library(wordcloud)
+      library(RColorBrewer)   
+      library(gridExtra)      
+      library(ggplot2)
+      library(tidyr)
+```
+
+In this Milestone Report we will illustrate progress made on Data Science Capstone by by Johns Hopkins University. In this course we will apply natural language processing (NLP) resources in R to develop an application that will predict next words based on a previous inout of a word or phrase. In this update, we review the provided dataset, its major features, including any summary statistics and tables/plots that may be helpful. Finally, we will detail how we intend to proceeed in developing both the algorythm and the Shiny app, how we will test the algorythm, and any interesting findings we discovered along the way. Original dataset can be found <a href="https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-SwiftKey.zip">here</a>. 
+
+The project files are contained in a <b>Github</b> repository 
+<a href="https://github.com/tomyr95/NLP">here</a>.
+
+The data file <b>Capstone Dataset</b> for this project is 
+<a href="https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-SwiftKey.zip">here</a>.
+
+The size of this file is significant as can be seen in the following corpora summary:
+
+```{r, echo = FALSE, cache = TRUE, eval = TRUE}
+      docs_path <- "/Users/tomyr/Documents/GitHub/NLP/dataset"
+      files <- readtext(docs_path, encoding = "UTF-8")
+      docs <- corpus(files)
+      summary(docs)
+```
+      
+Milestone Update
+========================================================
+<div class="footer" style="margin-top:100px;font-size:100%;">
+NLP Milestone Report - Data Science Capstone, By: Tomas R. Rodriguez, 5/26/19<br></div>
+
+The following libraries were used in this project, so far:
+
+```{r, echo = TRUE, EVAL = FALSE}
+      library(LaF)            
+      library(quanteda)       
+      library(data.table)
+      library(readtext)
+      library(dplyr)
+      library(wordcloud)
+      library(RColorBrewer)   
+      library(gridExtra)      
+      library(ggplot2)
+      library(tidyr)
+```
+
+The following steps have been completed so far:
+1- Upload and analyse 'Capstone Data'
+2- Preparation of Training, Validation, and Test datasets.
+3- Process data and build Ngrams for n=1,2,3,4,5. (See Next Slides)
+4- Complete simple working model with basic backoff (i.e. MLE).
+5- Document key learnings and next steps.
+
+Next Steps:
+1- Improve algorythm text processing (i.e. remove suplicates, implement synonym filter).
+2- Improve algorythm performance with smoothing techniques (i.e. Katz, Kneser-Ney).
+3- Improve alg0rythm performance by adjusting parameters, reviewing Perplexity.
+4- Complete Shiny data product, implementing final prediction model.
+5- Submit Final Project submission for review w/ key learnings.
+
+Will review and explain more detail in following slides.
+
+Training, Validation, and Testing Datasets
+========================================================
+
+In preparing and reviewing a prediction model it is essential to divide original dataset into subsets to allow for <b>training</b> of the model, further <b>validation</b> to enhance and tweak model performance, and a <b>testing</b> set to evaluate the final product. it is very important to keep these files independant and not use any of the datasets outside of its intended process.
+
+We uses the following splits of the original data: Testing-60%, Validation-20%, Testing-20%.
+
+So far, we have throroughly reviewed the Training dataset. We need to clean this data to a point where we have the words which we want to predict and nothing we do not need. For example, we change the whole data set into lowercase and remove features such as punctuation, symbols, URLs, hyphens, and similar items. In addition, we run the file agains a database of English words to weed out foreign languages and also apply a profanity filer. This leads to tokenization of the data so that we can move on to a more efficient analysis and processing of the data. The function used is below, for reference:
+
+```{r, eval = FALSE, echo = TRUE}
+
+  clean_txt <- function(txt){
+            toks <- tokens(txt, remove_numbers = TRUE, remove_punct = TRUE,
+                        remove_symbols = TRUE, remove_separators = TRUE,
+                        remove_twitter = TRUE, remove_url = TRUE,
+                        remove_hyphens = TRUE)
+            toks <- tokens_tolower(toks)
+            toks <- tokens_remove(toks, valuetype = "regex", pattern = "\\d")
+            toks <- tokens_remove(toks, valuetype = "regex", pattern = "^(?![a-z]).+")
+            toks <- tokens_remove(toks, pattern = profanity)
+            return(toks)
+   }
+```
+
+Process Data & Build Ngrams (n=1)
+========================================================
+
+Ngrams will be essential to our modeling approach because they will allow us to identify what word and word combinations are within our files (i.e Corpora). This is our reference to establish a baseline that repreProcess Data & Build Ngrams (n=3,4,5)
+sents the English language and will be used in our training algorythm. Here are some of our results as seen in both word cloud and frequency chart format:
+
+![Ngram(n=1)](png/cloud1.png)
+
+Process Data & Build Ngrams (n=2)
+========================================================
+
+![Ngram(n=1)](png/cloud2.png)
+
+Process Data & Build Ngrams (n=3,4,5)
+========================================================
+
+![Ngram(n=1)](png/cloud33.png)
+
+Notes:
+
+1- As can be seen there are many repeated words. We will resolve this in next model review.
+2- We are also not sure Ngram (n=5) will be needed in final model, but keep for now.
+
+Simple Working Model Approach
+========================================================
+
+Our first simple, working model is strictly based on utilizing the Ngrams with a backoff algorythm and identify a maximum-likelyhood estimation (MLE) of what the next word should be that follows a user inputed text, typically a partial sentince or a lone word. More advanced smoothing and backoff algorythms are under review in our next steps.
+
+Due to the large nature of the datasets from the Ngrams and to speed up processing we have decided to use environment variables. R provides a very easy way to imprement this to conctruct our hashes (to store our Ngrams).
+
+Results:
+
+1- Our model is currently predicting mostly bi-grams and tri-grams, so in all likelyhood we need to increase of Ngram sizes and/or explore eliminating stopwords. In order to save both space and time, these words are dropped at indexing time and then ignored at search time, but it may have an impact on predicatability.
+
+2- The model performed dramatically fact (i.e. seconds) so this tells us we may have plenty of room to increase in both Ngram inputs and more elabirate processing techniqes. This is a good sign and seems so far we have left much improvement to be delivered.
+
+3- We have not evaluated the performace of our model yet, formally. We will do so for our final product using a perplexity measure.  perplexity is a measurement of how well a probability distribution or probability model predicts a sample. It may be used to compare probability models. A low perplexity indicates the probability distribution is good at predicting the sample.
+
+4- We will next move to build our more advanced algorythm, validate, and test.
+
+5- The final product will be to incorporate the model into a data product.

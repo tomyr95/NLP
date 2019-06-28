@@ -1,0 +1,122 @@
+<style>
+      body {
+            background-image: url(http://bit.ly/2LiRr2J);
+            background-position: center center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+      }
+      .section .reveal .state-background {
+          background-image: url(http://bit.ly/2LiRr2J);
+          background-position: center center;
+          background-attachment: fixed;
+          background-repeat: no-repeat;
+          background-size: 125% 125%;
+      }
+      .section .reveal h1,
+      .section .reveal p {
+          color: black;
+          position: relative;
+          top: 10%;
+      }
+      .footer {
+            color: black; background: white;
+            position: fixed; top: 90%;
+            text-align:center; width:100%;
+      }
+</style>
+
+
+PredictWord App
+========================================================
+author: Tomas R. Rodriguez
+date: 6/28/2019
+font-family: Verdana
+width: 1920
+height: 1080
+
+Overview
+========================================================
+<div class="footer" style="margin-top:100px;font-size:100%;">
+PredictWord App - Data Science Capstone, By: Tomas R. Rodriguez, 6/28/19<br></div>
+
+<br>
+Word prediction is a very useful feature in natural language processing (NLP) applications. It is not only interesting to see, but can actually aid the user by reducing typing fatigue via reduction of keystrokes neeeded. It can also help the user uncover potenaitl areas of further inquiry. It also helps improve spell checking as the user types. A good algorythm is one that is both efficient on resources expended and accuracy of prediction.
+
+<b>PredictWord</b> is an application developed to predict words by implementing one approach to building an algorythm that has a basis the building of an n-gram database to aid with this prediction. An n-gram is a contigous succession of n words taken from a given sample of speech. In our case, we expect n-grams to have meaning, as related to what is the expected correct usage of the English language. Our application makes use of an n-gram, probabilistic language model to achieve this purpose.
+
+The approach is built based on a reference 
+<b><a href="https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-SwiftKey.zip">DataSet</a></b>
+ (zip file) of thousands of blogs, news articles, and twitter feeds. This collection of texts or <u>corpus</u> was then split into a training (60%), validation (20%), and testing (20%) datasets. The training dataset was carefully prepared into n=1 to n=5 n-grams by cleaning, tokenization, and further processing of data that was subsequently saved into data tables to be used by the final application.
+ 
+In our app we cleanup and tokenize an n-gram (text input) from the user and apply our algorythm to predict the next word. We will get into more detail in the following slides on how we go about this.
+
+We believe this approach lends itself to ease of implementation based on its portability and simplicity.
+
+The <b>PredictWord</b> application showing our algorythm can be seen 
+<b><a href="https://tomyr95.shinyapps.io/WordPredict/">here</a></b>.
+
+
+Algorythm
+========================================================
+<div class="footer" style="margin-top:100px;font-size:100%;">
+PredictWord App - Data Science Capstone, By: Tomas R. Rodriguez, 6/28/19<br></div>
+
+<br>
+1- <b>Building n-grams</b>: Likely the most important part of the algorithm is building the database from which we will precict. As mentioned before, we decided to use n=1 to n=5 ngrams, but the process starts with processing the corpus to identify the words or <u>tokens</u> we will use as a reference of the English language. After we tokenize the whole corpus, we proceeded with elimination of numbers, puctuations, symbols, separators, hyphens, and repeated words. In addition, we decided to remove all twitter hash-tags, profanity worss, and URL references. Care was taken to "pad" these removals with blank entrees so as to not create bogus n-grams subsequently.
+- All n-grams were saved as binary .Rdata  <b><i><a href="https://cran.r-project.org/web/packages/data.table/index.html">data.table</a></i></b>
+ files for subsequent use and fast-access purposes.
+- We used the R 
+<b><i><a href="https://cran.r-project.org/web/packages/quanteda/index.html">quanteda</a></i></b>
+ library for corpus tokenization and clean-up purposes.
+- Any n-grams occuring twice or less were removed from our database.
+
+<br>
+2- <b>Prediction Algorythm</b>: In the PredictWord app, the user inputed n-gram is cleaned up by the same process as the original n-grams. We made use of the 
+<i><b><a href="https://www.aclweb.org/anthology/D07-1090">Stupid Backoff</a></b></i>
+ smoothing approach to predict and assign increasing likelyhood scores based on the n-gram frequency tables in our database. It has been shown that this approach is fairly well suited for very large n-gram databases (i.e. like our case), approximating the accuracy of other, more elaborate apporaches like 
+<i><a href="https://en.wikipedia.org/wiki/Kneser%E2%80%93Ney_smoothing">Kneser–Ney</a></i>.
+- For blank entries, we recommend the most frequently occuirng words as a starting point.
+ 
+
+PredictWord App
+========================================================
+<div class="footer" style="margin-top:100px;font-size:100%;">
+PredictWord App - Data Science Capstone, By: Tomas R. Rodriguez, 6/28/19<br></div>
+
+<br>
+Instructions:
+
+The application loads to a screen with three tabs: [Main], [Description], and [Help]. The <b>[Main]</b> tab houses the application, while the other tabs decribe how the app works and how to interact with it respectively. As the app loads, it brings into memory 5 n-gram files prodced before that hold the most frequent n-grams for n=1 through n=5. You will also see a user input screen where the user can enter a phrase with seven action buttons. Below that you will see the applcation results as a list of ranked items 1 through 5 showing the <i>NextWord</i> predictions. In this table, the <i>sScore</i> represents the resulting likelyhood based on the backoff and smoothing algorythms. The final column nGram shows at what level <i>n-gram</i> table that particular match occured.
+
+<br>
+Heres how you interact with the application:
+
+1- The application provides a starter n-gram already placed in the input windo, which you can replace at any point by clicking in the field and writing your own entry. By selecting the <b>[Random Ngram]</b> button the systems will randonly return a 5-gram from the loaded data base. You may use the <b>[Clear]</b> button to clear the field.
+
+2- The table showing the predicted words will update everytime a change is made to the field and you may select one of the buttons labeled <b>[Add1]</b> - <b>[Add5]</b> to select a result accordingly. In doing so, that word will be added to the end of the n-gram displayed in the window. The table will recalculate as well.
+
+
+More Information
+========================================================
+<div class="footer" style="margin-top:100px;font-size:100%;">
+PredictWord App - Data Science Capstone, By: Tomas R. Rodriguez, 6/28/19<br></div>
+
+<br>
+<b>Application</b>
+- https://tomyr95.shinyapps.io/PredictWord/
+
+<br>
+<b>Github Repository</b>
+- https://github.com/tomyr95/NLP
+
+<br>
+<b>Slide Deck</b>
+- http://rpubs.com/tomyr95/PredictWord
+
+<br><br>
+<b>Other References</b>
+- <i><a href="https://web.stanford.edu/~jurafsky/NLPCourseraSlides.html">Stanford Lecture Slides: Dan Jurafsky & Christopher Manning, Stanford University.</a></i>
+- <i><a href="https://www.ntu.edu.sg/home/ehchua/programming/howto/Regexe.html">Programming Notes; Regular Expressions (Regex): Chua Hock-Chuan, NTU Signapore.</a></i>
+- <i><a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">Introduction to data.table Vignette: CRAN, 03/28/2019.</a></i>
+- <i><a href="https://tutorials.quanteda.io/">Quanteda Tutorials: Kohei Watanabe & Stefan Müller.</a></i>
