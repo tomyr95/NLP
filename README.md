@@ -17,12 +17,12 @@ The <b>PredictWord</b> application showing our algorythm can be seen
 Description of Files in Repository:
 <br>
 <br>> FileSubsets.R --- Creates Training, Validation, and Testing files.
-<br>CleanTokens2.R --- Cleans-Up Training Data & Crates/Saves N-grams.
-<br>CompleteIt.R --- Word Prediction Algorythm.
+<br>> CleanTokens2.R --- Cleans-Up Training Data & Crates/Saves N-grams.
+<br>> CompleteIt.R --- Word Prediction Algorythm.
 <br>
-<br>benchmark.R --- Runs Common Benchmark from Data Science Capstone.
+<br>> benchmark.R --- Runs Common Benchmark from Data Science Capstone.
 <br>
-<br>5grams_Val_DataPrep.R --- Prepares Data from Validation for Performance Review/Enhancement.
-<br>5grams_Val.R --- Validates Model Performance on Validation Data.
+<br>> 5grams_Val_DataPrep.R --- Prepares Data from Validation for Performance Review/Enhancement.
+<br>> 5grams_Val.R --- Validates Model Performance on Validation Data.
 <br>
-<br>global.R, ui.R, server.R, description.HTLM, instructions.HTML --- Shiny Application Files.
+<br>> global.R, ui.R, server.R, description.HTLM, instructions.HTML --- Shiny Application Files.
