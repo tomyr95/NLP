@@ -14,15 +14,15 @@ The <b>PredictWord</b> application showing our algorythm can be seen
 <b><a href="https://tomyr95.shinyapps.io/WordPredict/">here</a></b>.
 
 <br><br>
-Description of Files in Repository
+Description of Files in Repository:
 <br>
 <br>FileSubsets.R --- Creates Training, Validation, and Testing files.
 <br>CleanTokens2.R --- Cleans-Up Training Data & Crates/Saves n=1 to n=5 n-grams.
 <br>CompleteIt.R --- Word Prediction Algorythm.
-<br><br>
+<br>
 <br>Benchmark.R --- Runs Common Benchmark from Data Science Capstone.
-<br><br>
+<br>
 <br>5grams_Val_DataPrep.R --- Prepares Data from Validation for Performance Review/Enhancement
 <br>5grams_Val.R --- Validates Model Performance on Validation Data
-<br><br>
+<br>
 <br>global.R, ui.R, server.R, description.HTLM, instructions.HTML --- Shiny Application Files
