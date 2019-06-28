@@ -13,19 +13,19 @@ We believe this approach lends itself to ease of implementation based on its por
 The <b>PredictWord</b> application showing our algorythm can be seen 
 <b><a href="https://tomyr95.shinyapps.io/WordPredict/">here</a></b>.
 
-
+<br><br>
 Description of Files in Repository
-
-   FileSubsets.R            Creates Training (60%), Validation (20%), and Testing (20%) files.
-   CleanTokens2.R           Cleans-Up Training Data & Crates/Saves n=1 to n=5 n-grams.
-   CompleteIt.R             Word Prediction Algorythm.
-   
-   Benchmark.R              Runs Common Benchmark from Data Science Capstone.
-   
-   5grams_Val_DataPrep.R    Prepares Data from Validation for Performance Review/Enhancement
-   5grams_Val.R             Validates Model Performance on Validation Data
-   
-   global.R                 Shiny Application Files
-   ui.R
-   server.R
-   description.HTML
+<br>
+<br>FileSubsets.R            Creates Training (60%), Validation (20%), and Testing (20%) files.
+<br>CleanTokens2.R           Cleans-Up Training Data & Crates/Saves n=1 to n=5 n-grams.
+<br>CompleteIt.R             Word Prediction Algorythm.
+<br><br>
+<br>Benchmark.R              Runs Common Benchmark from Data Science Capstone.
+<br><br>
+<br>5grams_Val_DataPrep.R    Prepares Data from Validation for Performance Review/Enhancement
+<br>5grams_Val.R             Validates Model Performance on Validation Data
+<br><br>
+<br>global.R                 Shiny Application Files
+<br>ui.R
+<br>server.R
+<br>description.HTML
