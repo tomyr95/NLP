@@ -16,7 +16,7 @@ The <b>PredictWord</b> application showing our algorythm can be seen
 <br><br>
 Description of Files in Repository:
 <br>
-<br>FileSubsets.R --- Creates Training, Validation, and Testing files.
+<br>> FileSubsets.R --- Creates Training, Validation, and Testing files.
 <br>CleanTokens2.R --- Cleans-Up Training Data & Crates/Saves N-grams.
 <br>CompleteIt.R --- Word Prediction Algorythm.
 <br>
