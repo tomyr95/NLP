@@ -20,7 +20,7 @@ Description of Files in Repository:
 <br>CleanTokens2.R --- Cleans-Up Training Data & Crates/Saves N-grams.
 <br>CompleteIt.R --- Word Prediction Algorythm.
 <br>
-<br>Benchmark.R --- Runs Common Benchmark from Data Science Capstone.
+<br>benchmark.R --- Runs Common Benchmark from Data Science Capstone.
 <br>
 <br>5grams_Val_DataPrep.R --- Prepares Data from Validation for Performance Review/Enhancement.
 <br>5grams_Val.R --- Validates Model Performance on Validation Data.
