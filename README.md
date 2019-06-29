@@ -26,3 +26,5 @@ Description of Files in Repository:
 <br>> 5grams_Val.R --- Validates Model Performance on Validation Data.
 <br>
 <br>> global.R, ui.R, server.R, description.HTLM, instructions.HTML --- Shiny Application Files.
+<br>
+<br>> Milestone.Rpres, SlideDEck.Rpres, bkgd.png --- Project Progress Reports.
