@@ -27,4 +27,4 @@ Description of Files in Repository:
 <br>
 <br>> global.R, ui.R, server.R, description.HTLM, instructions.HTML --- Shiny Application Files.
 <br>
-<br>> Milestone.Rpres, SlideDEck.Rpres, bkgd.png --- Project Progress Reports.
+<br>> Milestone.Rpres, SlideDeck.Rpres, bkgd.png --- Project Progress Reports.
